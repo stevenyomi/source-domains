@@ -1,0 +1,45 @@
+name: Update domains
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "5 4 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  update:
+    name: Update domains
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Setup Git
+        working-directory: ./gh-pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Update NewToki domain number
+        working-directory: ./gh-pages
+        run: ../update.sh ../newtoki.py
+
+      - name: Push changes
+        working-directory: ./gh-pages
+        run: git push
