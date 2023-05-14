@@ -19,3 +19,7 @@ Data can be found in the `gh-pages` branch.
 ### WNACG
 
 - `wnacg.txt`: Current domain names (base URL).
+
+### Jinman Tiantang
+
+- `jmcomic.txt`: Current domain names.

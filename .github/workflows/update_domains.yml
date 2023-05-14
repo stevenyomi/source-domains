@@ -48,6 +48,10 @@ jobs:
         working-directory: ./gh-pages
         run: ../update.sh ../wnacg.py
 
+      - name: Update JM domains
+        working-directory: ./gh-pages
+        run: ../update.sh ../jmcomic.py
+
       - name: Push changes
         working-directory: ./gh-pages
         run: git push
