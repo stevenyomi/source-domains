@@ -44,6 +44,10 @@ jobs:
         working-directory: ./gh-pages
         run: ../update.sh ../zerobyw.py
 
+      - name: Update WNACG domains
+        working-directory: ./gh-pages
+        run: ../update.sh ../wnacg.py
+
       - name: Push changes
         working-directory: ./gh-pages
         run: git push

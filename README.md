@@ -15,3 +15,7 @@ Data can be found in the `gh-pages` branch.
 ### Zerobyw
 
 - `zerobyw.txt`: Current domain name (base URL), which updates roughly every 2 months.
+
+### WNACG
+
+- `wnacg.txt`: Current domain names (base URL).
