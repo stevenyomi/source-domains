@@ -3,7 +3,7 @@ import re
 
 import httpx
 
-link = 'https://www.wnacglink.top/' if os.getenv('CI') else 'https://wn01.ru/'
+link = 'https://wn01.ru/'
 regex = re.compile(r'<a href="(https?://([.\w]+))/?" target="_blank"><i>\2</i></a>')
 
 try:
