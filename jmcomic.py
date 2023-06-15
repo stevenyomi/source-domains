@@ -10,7 +10,7 @@ try:
     text = re.sub(r'<.+?>', ' ', res.text.replace('&nbsp;', ' '))
     domains = re.findall(r'[-\w]+\.[-\w.]+', text)
     assert domains[:4] == ['18comic.vip', '18comic.org', 'jmcomic.me', 'jmcomic1.me']
-    end = domains.index('jm365.xyz')
+    end = domains.index('jm365.work')
     assert end > 4
     domains = ','.join(domains[4:end])
 
