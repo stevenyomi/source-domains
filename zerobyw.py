@@ -15,8 +15,9 @@ try:
     with open('zerobyw.txt', 'w') as f:
         f.write(url)
 
+    domain = domain.removeprefix('www.')
     with open('.git/COMMIT_EDITMSG', 'w') as f:
-        f.write(f'Zerobyw {url}')
+        f.write(f'Zerobyw {domain}')
 
 except BaseException as e:
     print(f'::error ::{e}')
