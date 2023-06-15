@@ -3,7 +3,7 @@ import re
 import httpx
 
 try:
-    res = httpx.get('https://jmcomic1.bet/')
+    res = httpx.get('https://jmcomic2.bet/')
     if res.status_code != 200:
         raise Exception(f'HTTP {res.status_code}')
 
