@@ -1,9 +1,12 @@
 import re
+import os
 
 import httpx
 
+PROXY = os.getenv('JM_PROXY')
+
 try:
-    res = httpx.get('https://jmcomic2.bet/')
+    res = httpx.get(PROXY + 'https://jmcomic2.bet/')
     if res.status_code != 200:
         raise Exception(f'HTTP {res.status_code}')
 

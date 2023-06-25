@@ -49,6 +49,8 @@ jobs:
         run: ../update.sh ../wnacg.py
 
       - name: Update JM domains
+        env:
+          JM_PROXY: ${{ secrets.JM_PROXY }}
         working-directory: ./gh-pages
         run: ../update.sh ../jmcomic.py
 
