@@ -3,14 +3,16 @@ import os
 
 import httpx
 
-PROXY = os.getenv('JM_PROXY')
+PROXY = os.getenv('JM_PROXY') # Proxy for https://jmcomic2.bet/
 
 try:
-    res = httpx.get(PROXY + 'https://jmcomic2.bet/')
+    res = httpx.get(PROXY)
     if res.status_code != 200:
         raise Exception(f'HTTP {res.status_code}')
 
-    text = re.sub(r'<.+?>', ' ', res.text.replace('&nbsp;', ' '))
+    text = res.text.partition('<script>')[0]
+    text = text.replace('&nbsp;', ' ')
+    text = re.sub(r'<.+?>', ' ', text)
     domains = re.findall(r'[-\w]+\.[-\w.]+', text)
     assert domains[:4] == ['18comic.vip', '18comic.org', 'jmcomic.me', 'jmcomic1.me']
     end = domains.index('jm365.work')
