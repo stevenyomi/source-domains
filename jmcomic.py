@@ -1,12 +1,11 @@
 import re
-import os
 
 import httpx
 
-PROXY = os.getenv('JM_PROXY') # Proxy for https://jmcomic2.bet/
-
 try:
-    res = httpx.get(PROXY)
+    res = httpx.get('https://jmcomic-ltd.translate.goog/?_x_tr_sl=auto&_x_tr_tl=zh-TW', headers={
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    })
     if res.status_code != 200:
         raise Exception(f'HTTP {res.status_code}')
 
