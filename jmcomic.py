@@ -3,7 +3,7 @@ import re
 import httpx
 
 try:
-    res = httpx.get('https://jmcomic-ltd.translate.goog/?_x_tr_sl=auto&_x_tr_tl=zh-TW', headers={
+    res = httpx.get('https://jcomic--cn-vip.translate.goog/?_x_tr_sl=auto&_x_tr_tl=zh-TW', headers={
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
     })
     if res.status_code != 200:
