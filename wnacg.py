@@ -3,7 +3,7 @@ import re
 
 import httpx
 
-link = 'https://wn01.ru/'
+link = 'https://wnacg01.org/'
 regex = re.compile(r'<a href="(https?://([.\w]+))/?" target="_blank"><i>\2</i></a>')
 
 try:
