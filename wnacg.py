@@ -1,15 +1,10 @@
-import os
 import re
 
-import httpx
+from common import http_get, write_result
 
-link = 'https://wnacg01.org/'
-regex = re.compile(r'<a href="(https?://([.\w]+))/?" target="_blank"><i>\2</i></a>')
-
-try:
-    res = httpx.get(link)
-    if res.status_code != 200:
-        raise Exception(f'HTTP {res.status_code}')
+def main() -> None:
+    res = http_get('https://wnacg01.org/')
+    regex = re.compile(r'<a href="(https?://([.\w]+))/?" target="_blank"><i>\2</i></a>')
 
     urls, domains = [], []
     for match in regex.finditer(res.text):
@@ -18,12 +13,7 @@ try:
 
     assert len(urls) > 0
 
-    with open('wnacg.txt', 'w') as f:
-        f.write(','.join(urls))
+    write_result('wnacg.txt', ','.join(urls), 'WNACG ' + ','.join(domains))
 
-    with open('.git/COMMIT_EDITMSG', 'w') as f:
-        f.write('WNACG ' + ','.join(domains))
 
-except BaseException as e:
-    print(f'::error ::{e}')
-    exit(1)
+main()

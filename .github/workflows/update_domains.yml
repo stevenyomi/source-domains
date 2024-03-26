@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout main branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Checkout gh-pages branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: gh-pages
           path: gh-pages
@@ -49,8 +49,6 @@ jobs:
         run: ../update.sh ../wnacg.py
 
       - name: Update JM domains
-        env:
-          JM_PROXY: ${{ secrets.JM_PROXY }}
         working-directory: ./gh-pages
         run: ../update.sh ../jmcomic.py
 
