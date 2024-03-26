@@ -12,6 +12,10 @@ Data can be found in the `gh-pages` branch.
 - `newtoki.txt`: Their domain number, which updates roughly every week.
 - `newtoki_log.md`: Previous logs. Data from Internet Archive and Telegram channel.
 
+### Toonkor
+
+- `toonkor.txt`: Their domain number, which updates every 3-4 days.
+
 ### Zerobyw
 
 - `zerobyw.txt`: Current domain name (base URL), which updates roughly every 2 months.

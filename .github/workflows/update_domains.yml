@@ -40,6 +40,10 @@ jobs:
         working-directory: ./gh-pages
         run: ../update.sh ../newtoki.py
 
+      - name: Update Toonkor domain number
+        working-directory: ./gh-pages
+        run: ../update.sh ../toonkor.py
+
       - name: Update Zerobyw domain
         working-directory: ./gh-pages
         run: ../update.sh ../zerobyw.py
