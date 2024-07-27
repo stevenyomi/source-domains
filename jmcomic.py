@@ -3,7 +3,7 @@ import re
 from common import http_get, write_result
 
 def main() -> None:
-    res = http_get('https://jmcomicltd-xyz.translate.goog/?_x_tr_sl=auto&_x_tr_tl=zh-TW', headers={
+    res = http_get('https://jmcomicgo-xyz.translate.goog/?_x_tr_sl=auto&_x_tr_tl=zh-TW', headers={
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
     })
 
