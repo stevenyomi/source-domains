@@ -15,11 +15,12 @@ def main() -> None:
         link_domain = f.read()
 
     with Client() as client:
+        link_msg = None
         if (res := get_domain(client, link_domain)).is_redirect:
             subdomain, _, domain = URL(res.headers['Location']).host.partition('.')
             assert domain == 'translate.goog'
             link_domain = subdomain.replace('--', '#').replace('-', '.').replace('#', '-')
-            write_result('jmcomic-link.txt', link_domain, f'JM-link {link_domain}')
+            write_result('jmcomic-link.txt', link_domain, link_msg := f'JM-link {link_domain}')
             assert (res := get_domain(client, link_domain)).is_success
 
     text = (text := res.text)[(index := text.index('<body>') + 6) : text.index('<script>', index)]
@@ -32,6 +33,6 @@ def main() -> None:
     domains = ','.join(domains[4:end])
 
 
-    write_result('jmcomic.txt', domains, f'JM {domains}')
+    write_result('jmcomic.txt', domains, f'JM {domains}' if not link_msg else f'{link_msg}, JM {domains}')
 
 main()
