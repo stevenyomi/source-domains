@@ -41,6 +41,7 @@ jobs:
         run: ../update.sh ../newtoki.py
 
       - name: Update Toonkor domain number
+        if: "!always()"
         working-directory: ./gh-pages
         run: ../update.sh ../toonkor.py
 
