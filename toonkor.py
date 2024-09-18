@@ -15,7 +15,7 @@ def main() -> None:
         except Exception:
             return args[0]
 
-    idna.decode = decode
+    idna.decode = wrapped_decode
 
     with Client() as client:
         response = get_domain(client, "xn--yq5bv6mzmcca.org")
