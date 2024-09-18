@@ -1,12 +1,17 @@
 import re
 
-from common import http_get, write_result
+from httpx import Client
+
+from common import extract_location, get_domain, write_result
 
 
 def main() -> None:
-    res = http_get("https://t.me/s/new_toonkor")
+    with Client() as client:
+        response = get_domain(client, "xn--yq5bv6mzmcca.org")
+        assert response.is_redirect
+        domain = extract_location(response)
 
-    number = re.findall(r"https://toonkor(\d+)\.com", res.text)[-1]
+    number = re.match(r"toonkor(\d+)\.com", domain).group(1)
 
     write_result("toonkor.txt", number, f"Toonkor {number}")
 

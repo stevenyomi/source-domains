@@ -1,13 +1,8 @@
 import re
 
-from httpx import URL, Client, Response
+from httpx import Client
 
-from common import http_get, write_result
-
-def get_domain(client: Client, domain: str) -> Response:
-    return client.get(f'https://{domain.replace('-', '--').replace('.', '-')}.translate.goog/?_x_tr_sl=auto&_x_tr_tl=zh-TW', headers={
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-    })
+from common import extract_location, get_domain, write_result
 
 
 def main() -> None:
@@ -17,9 +12,7 @@ def main() -> None:
     with Client() as client:
         link_msg = None
         if (res := get_domain(client, link_domain)).is_redirect:
-            subdomain, _, domain = URL(res.headers['Location']).host.partition('.')
-            assert domain == 'translate.goog'
-            link_domain = subdomain.replace('--', '#').replace('-', '.').replace('#', '-')
+            link_domain = extract_location(res)
             write_result('jmcomic-link.txt', link_domain, link_msg := f'JM-link {link_domain}')
             assert (res := get_domain(client, link_domain)).is_success
 

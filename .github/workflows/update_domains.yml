@@ -38,24 +38,23 @@ jobs:
 
       - name: Update NewToki domain number
         working-directory: ./gh-pages
-        run: ../update.sh ../newtoki.py
+        run: python3 ../newtoki.py
 
       - name: Update Toonkor domain number
-        if: "!always()"
         working-directory: ./gh-pages
-        run: ../update.sh ../toonkor.py
+        run: python3 ../toonkor.py
 
       - name: Update Zerobyw domain
         working-directory: ./gh-pages
-        run: ../update.sh ../zerobyw.py
+        run: python3 ../zerobyw.py
 
       - name: Update WNACG domains
         working-directory: ./gh-pages
-        run: ../update.sh ../wnacg.py
+        run: python3 ../wnacg.py
 
       - name: Update JM domains
         working-directory: ./gh-pages
-        run: ../update.sh ../jmcomic.py
+        run: python3 ../jmcomic.py
 
       - name: Push changes
         if: always()
