@@ -42,7 +42,7 @@ def main() -> None:
     domains = re.findall(r'[-\w]+\.[-\w.]+', text)
     # TODO: new fixed domains + possible redirection
     assert domains[:4] == ['18comic.vip', '18comic.org', 'jmcomic.me', 'jmcomic1.me']
-    end = domains.index('jmc8763.xyz')
+    end = domains.index('jmc8763.org')
     assert end > 4
     domains = ','.join(map(str.lower, domains[4:end]))
 
