@@ -44,9 +44,9 @@ def main() -> None:
     assert domains[:4] == ['18comic.vip', '18comic.org', 'jmcomic.me', 'jmcomic1.me']
     end = domains.index('jmc8763.org')
     assert end > 4
-    domains = ','.join(map(str.lower, domains[4:end]))
+    result = ','.join(domains := list(map(str.lower, domains[4:end])))
 
-
-    write_result('jmcomic.txt', domains, f'JM {domains}')
+    shortened = ','.join(d for d in domains if not d.startswith('jmcomic-zzz'))
+    write_result('jmcomic.txt', result, f'JM {shortened}')
 
 main()
