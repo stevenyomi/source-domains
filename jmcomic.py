@@ -36,15 +36,17 @@ def main() -> None:
             else:
                 raise Exception(f'HTTP {res.status_code}')
 
-    text = (text := res.text)[(index := text.index('<div')) : text.index('<script>', index)]
+    BEGIN = '<h1>禁漫天堂發布頁</h1>'
+    END = 'APP軟件下載'
+    text = (text := res.text)[(index := text.index(BEGIN)) : text.index(END, index)]
     text = text.replace('&nbsp;', ' ')
     text = re.sub(r'<.+?>', ' ', text)
     domains = re.findall(r'[-\w]+\.[-\w.]+', text)
     # TODO: new fixed domains + possible redirection
-    assert domains[:4] == ['18comic.vip', '18comic.org', 'jmcomic.me', 'jmcomic1.me']
-    end = domains.index('jmc8763.org')
-    assert end > 4
-    result = ','.join(domains := list(map(str.lower, domains[4:end])))
+    COUNT = len(PREFIX := ['18comic.vip', '18comic.org'])
+    assert domains[:COUNT] == PREFIX
+    assert len(domains) > COUNT
+    result = ','.join(domains := list(map(str.lower, domains[COUNT:])))
 
     shortened = ','.join(d for d in domains if not d.startswith('jmcomic-zzz'))
     write_result('jmcomic.txt', result, f'JM {shortened}')
