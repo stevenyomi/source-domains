@@ -3,7 +3,7 @@ import re
 from common import http_get, write_result
 
 def main() -> None:
-    res = http_get('https://wnacg.date/')
+    res = http_get('https://wnlink.ru/')
     regex = re.compile(r'<a href="(https?://([.\w]+))/?" target="_blank"><i>\2</i></a>')
 
     urls, domains = [], []
