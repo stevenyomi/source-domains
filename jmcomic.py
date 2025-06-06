@@ -50,5 +50,3 @@ def main() -> None:
 
     shortened = ','.join(d for d in domains if not d.startswith('jmcomic-zzz'))
     write_result('jmcomic.txt', result, f'JM {shortened}')
-
-main()

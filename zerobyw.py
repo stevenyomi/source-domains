@@ -12,5 +12,3 @@ def main() -> None:
 
     domain = domain.removeprefix('www.')
     write_result('zerobyw.txt', url, f'Zerobyw {domain}')
-
-main()

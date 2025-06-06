@@ -8,5 +8,3 @@ def main() -> None:
     number = re.findall(r'https://newtoki(\d+)\.com', res.text)[-1]
 
     write_result('newtoki.txt', number, f'NewToki {number}')
-
-main()

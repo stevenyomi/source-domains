@@ -25,6 +25,3 @@ def main() -> None:
     number = re.match(r"tkor(\d+)\.com", domain).group(1)
 
     write_result("toonkor.txt", number, f"Toonkor {number}")
-
-
-main()

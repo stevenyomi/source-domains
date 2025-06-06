@@ -14,6 +14,3 @@ def main() -> None:
     assert len(urls) > 0
 
     write_result('wnacg.txt', ','.join(urls), 'WNACG ' + ','.join(domains))
-
-
-main()

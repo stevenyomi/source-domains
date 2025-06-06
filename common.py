@@ -1,31 +1,13 @@
 from subprocess import run
 from sys import stderr, stdout
 
-from httpx import URL, Client, Response, get
+from httpx import URL, Client, Response
+
+_CLIENT = Client()
 
 
 def http_get(url: str, *, headers=None):
-    if (res := get(url, headers=headers)).status_code != 200:
-        raise Exception(f"HTTP {res.status_code}")
-    return res
-
-
-def http_retry_get(url: str):
-    from tenacity import retry, stop_after_attempt
-
-    @retry(stop=stop_after_attempt(3))
-    def make_request(client: Client, url: str):
-        res = client.get(url)
-        if res.status_code >= 500:
-            raise Exception(f"HTTP {res.status_code}")
-        return res
-
-    with Client() as client:
-        res = make_request(client, url)
-
-    if res.status_code != 200:
-        raise Exception(f"HTTP {res.status_code}")
-    return res
+    return _CLIENT.get(url, headers=headers).raise_for_status()
 
 
 def get_domain(client: Client, domain: str) -> Response:
@@ -35,7 +17,7 @@ def get_domain(client: Client, domain: str) -> Response:
         headers={
             "User-Agent": (
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-                " Chrome/120.0.0.0 Safari/537.36"
+                " Chrome/137.0.0.0 Safari/537.36"
             )
         },
     )

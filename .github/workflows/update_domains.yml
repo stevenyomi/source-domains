@@ -25,7 +25,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.13"
           cache: pip
 
       - name: Install dependencies
@@ -37,27 +37,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Update NewToki domain number
-        working-directory: ./gh-pages
-        run: python3 ../newtoki.py
-
-      - name: Update Toonkor domain number
-        working-directory: ./gh-pages
-        run: python3 ../toonkor.py
-
-      - name: Update Zerobyw domain
-        working-directory: ./gh-pages
-        run: python3 ../zerobyw.py
-
-      - name: Update WNACG domains
-        working-directory: ./gh-pages
-        run: python3 ../wnacg.py
-
-      - name: Update JM domains
+      - name: Update domain numbers
         env:
           JM_PROXY: ${{ secrets.JM_PROXY }}
         working-directory: ./gh-pages
-        run: python3 ../jmcomic.py
+        run: python3 ../main.py
 
       - name: Push changes
         if: always()
