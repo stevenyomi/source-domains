@@ -1,16 +1,16 @@
 import re
 from os import getenv
 
-from httpx import URL, Client
+from httpx import URL
 
-from common import extract_location, get_domain, write_result
+from common import CLIENT, extract_location, get_domain, write_result
 
 
-def retry_get(client: Client, url: str):
+def retry_get(url: str):
     attempts = 5
     while True:
         try:
-            if (res := client.get(url)).status_code == 430:
+            if (res := CLIENT.get(url)).status_code == 430:
                 raise Exception(f'HTTP {res.status_code}')
             return res
         except Exception:
@@ -22,14 +22,14 @@ def main() -> None:
     with open('jmcomic-link.txt') as f:
         link_domain = f.read().partition('||')[0]
 
-    with Client() as client:
-        while (res := get_domain(client, link_domain)).is_redirect:
+    if True:
+        while (res := get_domain(link_domain)).is_redirect:
             link_domain = extract_location(res)
         if res.is_success:
             write_result('jmcomic-link.txt', f'{link_domain}||g', f'JM-link(g) {link_domain}')
         else:
             assert (proxy := getenv('JM_PROXY'))
-            while (res := retry_get(client, f'https://{proxy}/https://{link_domain}/')).is_redirect:
+            while (res := retry_get(f'https://{proxy}/https://{link_domain}/')).is_redirect:
                 link_domain = URL(res.headers['Location']).host
             if res.is_success:
                 write_result('jmcomic-link.txt', f'{link_domain}||p', f'JM-link(p) {link_domain}')

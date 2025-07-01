@@ -3,16 +3,16 @@ from sys import stderr, stdout
 
 from httpx import URL, Client, Response
 
-_CLIENT = Client()
+CLIENT = Client()
 
 
 def http_get(url: str, *, headers=None):
-    return _CLIENT.get(url, headers=headers).raise_for_status()
+    return CLIENT.get(url, headers=headers).raise_for_status()
 
 
-def get_domain(client: Client, domain: str) -> Response:
+def get_domain(domain: str) -> Response:
     subdomain = domain.replace("-", "--").replace(".", "-")
-    return client.get(
+    return CLIENT.get(
         f"https://{subdomain}.translate.goog/?_x_tr_sl=auto&_x_tr_tl=zh-TW",
         headers={
             "User-Agent": (

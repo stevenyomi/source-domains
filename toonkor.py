@@ -1,7 +1,6 @@
 import re
 
 import idna
-from httpx import Client
 
 from common import extract_location, get_domain, write_result
 
@@ -17,8 +16,8 @@ def main() -> None:
 
     idna.decode = wrapped_decode
 
-    with Client() as client:
-        response = get_domain(client, "xn--yq5bv6mzmcca.org")
+    if True:
+        response = get_domain("xn--yq5bv6mzmcca.org")
         assert response.is_redirect
         domain = extract_location(response)
 
