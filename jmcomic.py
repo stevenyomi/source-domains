@@ -42,11 +42,10 @@ def main() -> None:
     text = text.replace('&nbsp;', ' ')
     text = re.sub(r'<.+?>', ' ', text)
     domains = re.findall(r'[-\w]+\.[-\w.]+', text)
-    # TODO: new fixed domains + possible redirection
-    COUNT = len(PREFIX := ['18comic.vip', '18comic.org'])
+    # TODO: possible redirection
+    COUNT = len(PREFIX := ['18comic.vip', '18comic.ink', 'jmcomic-zzz.one', 'jmcomic-zzz.org'])
     assert domains[:COUNT] == PREFIX
     assert len(domains) > COUNT
     result = ','.join(domains := list(map(str.lower, domains[COUNT:])))
 
-    shortened = ','.join(d for d in domains if not d.startswith('jmcomic-zzz'))
-    write_result('jmcomic.txt', result, f'JM {shortened}')
+    write_result('jmcomic.txt', result, f'JM {result}')
