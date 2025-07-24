@@ -22,12 +22,15 @@ def main() -> None:
     with open('jmcomic-link.txt') as f:
         link_domain = f.read().partition('||')[0]
 
+    res = CLIENT.get(f'https://{link_domain}/')
+    print(res.status_code, res.text)
     if True:
         while (res := get_domain(link_domain)).is_redirect:
             link_domain = extract_location(res)
         if res.is_success:
             write_result('jmcomic-link.txt', f'{link_domain}||g', f'JM-link(g) {link_domain}')
         else:
+            print(res.status_code, res.text)
             assert (proxy := getenv('JM_PROXY'))
             while (res := retry_get(f'https://{proxy}/https://{link_domain}/')).is_redirect:
                 link_domain = URL(res.headers['Location']).host

@@ -3,7 +3,14 @@ from sys import stderr, stdout
 
 from httpx import URL, Client, Response
 
-CLIENT = Client()
+CLIENT = Client(
+    headers={
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
+            " Chrome/137.0.0.0 Safari/537.36"
+        )
+    }
+)
 
 
 def http_get(url: str, *, headers=None):
@@ -14,12 +21,6 @@ def get_domain(domain: str) -> Response:
     subdomain = domain.replace("-", "--").replace(".", "-")
     return CLIENT.get(
         f"https://{subdomain}.translate.goog/?_x_tr_sl=auto&_x_tr_tl=zh-TW",
-        headers={
-            "User-Agent": (
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)"
-                " Chrome/137.0.0.0 Safari/537.36"
-            )
-        },
     )
 
 
