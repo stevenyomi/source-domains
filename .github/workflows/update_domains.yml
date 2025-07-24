@@ -40,6 +40,7 @@ jobs:
       - name: Update domain numbers
         env:
           JM_PROXY: ${{ secrets.JM_PROXY }}
+          JM_PROXY_PATH: ${{ secrets.JM_PROXY_PATH }}
         working-directory: ./gh-pages
         run: python3 ../main.py
 
