@@ -1,1 +1,1 @@
-jmcomicqa.cc||p
+jmcomicws.cc||p
