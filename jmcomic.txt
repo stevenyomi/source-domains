@@ -1,1 +1,1 @@
-jm18c-bbm.cc,jm18c-uoi.net,jm18c-uoi.cc
+jm18c-bbm.cc,jm18c-uoi.net,jm18c-bbm.net
