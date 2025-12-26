@@ -1,9 +1,9 @@
 import re
 
-from common import get_domain, write_result
+from common import http_get, write_result
 
 def main() -> None:
-    res = get_domain('newtoki.link').raise_for_status()
+    res = http_get('https://t.me/s/newtoki9')
 
     number = re.findall(r'https://newtoki(\d+)\.com', res.text)[-1]
 
