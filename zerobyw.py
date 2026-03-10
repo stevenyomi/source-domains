@@ -1,13 +1,13 @@
 from common import http_get, write_result
 
 def main() -> None:
-    res = http_get('https://raw.githubusercontent.com/zerozzz123456/1/main/url.json')
+    res = http_get('https://raw.githubusercontent.com/zerozzz123456/1/main/appconfig.json')
 
-    url = res.json()['url'].strip().rstrip('/')
+    url = 'http:' + res.json()['websitedomain'].strip().rstrip('/')
 
     scheme, sep, domain = url.partition('://')
     assert sep == '://'
-    assert scheme == 'http' or scheme == 'https'
+    assert scheme == 'http'
     assert '/' not in domain
 
     domain = domain.removeprefix('www.')
