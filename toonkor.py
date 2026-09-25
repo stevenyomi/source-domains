@@ -16,11 +16,11 @@ def main() -> None:
 
     idna.decode = wrapped_decode
 
-    if True:
+    if True:  # https://t.me/s/tkor_com
         response = get_domain("xn--yq5bv6mzmcca.org")
         assert response.is_redirect
         domain = extract_location(response)
 
-    number = re.match(r"tkor(\d+)\.com", domain).group(1)
+    number = re.match(r"toonkor(\d+)\.org", domain).group(1)
 
     write_result("toonkor.txt", number, f"Toonkor {number}")
