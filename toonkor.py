@@ -21,6 +21,6 @@ def main() -> None:
         assert response.is_redirect
         domain = extract_location(response)
 
-    number = re.match(r"toonkor(\d+)\.org", domain).group(1)
+    number = re.match(r"(\d+)\.toonkor\.net", domain).group(1)
 
     write_result("toonkor.txt", number, f"Toonkor {number}")
