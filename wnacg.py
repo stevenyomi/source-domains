@@ -1,15 +1,17 @@
+import json
 import re
 
 from common import http_get, write_result
 
+
 def main() -> None:
-    res = http_get('https://wnlink.ru/')
-    regex = re.compile(r'<a href="(https?://([.\w]+))/?" target="_blank"><i>\2</i></a>')
+    res = http_get('https://wnacglink.com/')
+    assert (config := re.search(r'window\.__INITIAL_CONFIG__=(\{.+?\});</script>', res.text, re.S))
 
     urls, domains = [], []
-    for match in regex.finditer(res.text):
-        urls.append(match.group(1))
-        domains.append(match.group(2).removeprefix('www.'))
+    for site in json.loads(config.group(1))["sites"]:
+        urls.append(site['url'])
+        domains.append(site['url'].removeprefix('https://www.'))
 
     assert len(urls) > 0
 
